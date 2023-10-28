@@ -1,5 +1,6 @@
 package com.example.datum;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -15,10 +16,12 @@ import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
     private Context context;
+    Activity activity;
     private ArrayList _id, student_id, student_name, student_grade;
 
-    CustomAdapter(Context context, ArrayList _id, ArrayList student_id, ArrayList student_name,
+    CustomAdapter(Activity activity, Context context, ArrayList _id, ArrayList student_id, ArrayList student_name,
                   ArrayList student_grade){
+        this.activity = activity;
         this.context = context;
         this._id = _id;
         this.student_id = student_id;
@@ -48,7 +51,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 intent.putExtra("student_id",String.valueOf(student_id.get(position)));
                 intent.putExtra("student_name",String.valueOf(student_name.get(position)));
                 intent.putExtra("student_grade",String.valueOf(student_grade.get(position)));
-                context.startActivity(intent);
+                activity.startActivityForResult(intent,1);
             }
         });
     }
